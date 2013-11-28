@@ -1,0 +1,55 @@
+@charset "utf-8";
+/* CSS Document */
+
+.container {
+	position:fixed;
+	bottom:70px;
+	left: 0;  
+	right: 0;
+	text-align:center;
+}
+
+.spcontainer {
+	position:fixed;
+	bottom: 200px;
+	right: 20px;
+}
+
+#alphaupper {
+	font-size:250%;	
+}
+
+#alphalower {
+	font-size:250%;
+	
+}
+
+#transportupper {
+	font-size:25px;
+}
+
+#transportPage li {
+	padding-left:20px;
+	padding-top:10px;
+}
+
+#alphaPage li {
+	font-size:x-large;
+	padding-left:20px;
+	padding-top:10px;
+	padding-bottom:15px;
+	
+}
+
+#alpha h5 {
+	
+	font-size: 90%; }
+
+
+
+
+
+
+
+
+

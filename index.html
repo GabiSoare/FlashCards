@@ -1,0 +1,278 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Flashcards</title>
+
+<link rel="stylesheet" href="assets/jquery.mobile-1.2.0.min.css" /> -->
+
+<link rel="stylesheet" href="themes/f.min.css" />
+<link rel="stylesheet" href="assets/flashcards.css" />
+
+
+<script src="assets/jquery-1.8.2.min.js"></script>
+<!--<script src="assets/jquery.mobile-1.0.js"></script> -->
+<script src="assets/jquery.mobile-1.2.0.js"></script>
+
+<script src="assets/easeljs-0.5.0.min.js"></script>
+<script src="assets/cordova.js"></script>
+
+<!--
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0-rc.2/jquery.mobile-1.1.0-rc.2.min.css" />
+<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.1.0-rc.2/jquery.mobile-1.1.0-rc.2.min.js"></script>
+-->
+
+<script>
+$.mobile.defaultPageTransition = 'none'; 
+$.mobile.defaultDialogTransition = 'none';
+</script>
+
+<script>
+$(document).ready(function (){	
+
+	var instance, title, upper, lower, current;
+	var alphaArray=new Array();
+		
+	var my_media = null;
+    var mediaTimer = null;
+
+	function playAudio(src) 
+	{
+        // Create Media object from src
+
+        if (my_media) 
+		{
+            my_media.stop();
+        }
+        
+        my_media = new Media(src, onSuccess, onError);
+
+        // Play audio
+        my_media.play();
+    }
+
+    function getPath() 
+	{
+        var str = location.pathname;
+        var i = str.lastIndexOf('/');
+        return str.substring(0,i+1);
+    }
+
+    // onSuccess Callback
+    //
+    function onSuccess() 
+	{
+        console.log("playAudio():Audio Success");
+    }
+
+    // onError Callback
+    //
+    function onError(error) 
+	{
+        // alert('code: '    + error.code    + '\n' +
+        //       'message: ' + error.message + '\n');
+    }
+	
+	$("#sp1").click(function()
+	{
+		playAudio(getPath() + "sounds/"+ alphaArray[current].ins + ".mp3");
+	});
+
+
+
+//swipe left
+
+
+	$("#alphaCommonPage").on("swipeleft", function(){
+
+		if(current < alphaArray.length - 1 ) 
+		{
+			current++;
+			$('#alpha h5').text(alphaArray[current].ins);
+			$('#alphatitle').text(alphaArray[current].title);
+			$('#alphaupper').text(alphaArray[current].upper);
+			$('#alphalower').text(alphaArray[current].lower);
+			$('#alphapic').attr('src', "images/" + alphaArray[current].ins + '.png');
+		}
+	});
+		
+//swipe right
+
+	$("#alphaCommonPage").on("swiperight", function(){
+
+		if(current > 0  ) 
+		{
+			current--;
+			$('#alpha h5').text(alphaArray[current].ins);
+			$('#alphatitle').text(alphaArray[current].title);
+			$('#alphaupper').text(alphaArray[current].upper);
+			$('#alphalower').text(alphaArray[current].lower);
+			$('#alphapic').attr('src', "images/" + alphaArray[current].ins + '.png');
+		}
+	});
+	
+	
+	$.ajax({type: "GET",
+		url:"assets/main.xml",
+		dataType: "xml",
+		success: function (xml){
+			
+			$(xml).find('alphabets').each(function()
+			{
+				instance=$(this).find('instance').text();
+				title=$(this).find('title').text();
+				upper=$(this).find('upper').text();
+				lower=$(this).find('lower').text();
+				alphaArray.push({ins:instance, upper:upper, lower:lower, title:title});
+				
+				/*alert($(this).find('title').text());*/
+				$('<li><a href="#alphaCommonPage"><img src="images/'+ instance +'.png"/>'+ instance +'</a></li>').appendTo('#bets');
+				console.log(instance);
+							
+			})//each
+			
+			$('#alphaPage li').click(function()
+			{
+				current = $(this).index();
+				
+				$('#alpha h5').text(alphaArray[current].ins);
+				$('#alphatitle').text(alphaArray[current].title);
+				$('#alphaupper').text(alphaArray[current].upper);
+				$('#alphalower').text(alphaArray[current].lower);
+				$('#alphapic').attr('src', "images/" + alphaArray[current].ins + '.png');
+				$('#bets').listview('refresh');
+			})
+			
+			
+		}//success function
+		
+	})//ajax
+
+	
+})
+
+</script>
+</head>
+
+<body>
+<div data-role="page" id="home" data-theme="f">
+  
+  <div data-role="header" data-theme="f" data-position="fixed">
+    <h3>Welcome</h3>
+  </div>
+  <!-- end of header -->
+  
+  <div data-role="content">
+    <center>
+      <img src="images/learn2.png" />
+    </center>
+    <p>
+    <p> <a href="#menu" data-role="button" data-icon="arrow-r" data-iconpos="right" data-theme="f" data-transition="none" >Tap here to get started!</a> 
+  </div> 
+  <!-- end of content -->
+  
+  <div data-role="footer" data-theme="f" data-position="fixed">
+    <h3>Copyright 2013</h3>
+  </div> 
+  <!-- end of footer -->
+  
+</div> 
+<!-- end of home page -->
+
+<div data-role="page" id="menu" data-theme="f">
+
+  <div data-role="header" data-theme="f" data-position="fixed">
+    <h1>Home</h1>
+  </div> 
+  <!-- end of header -->
+  
+  <div data-role="content">
+  
+    <ul data-role="listview" >
+      <li> <a href="#alphaPage" data-transition="none"> <img src="images/abc.png"/>
+        <h3> Alphabets </h3>
+        </a> </li>
+      
+        <li> <a href="activities.html" rel="external" data-transition="none"> <img src="images/va.png"/>
+        <h3> Activities </h3>
+        </a> </li>
+    </ul>
+    <!-- end of listview --> 
+    
+  </div>
+  <!-- end of content -->
+  
+  <div data-role="footer" data-theme="f" data-position="fixed">
+    <h4> Copyright 2013</h4>
+  </div>
+  <!-- end of footer -->
+  
+</div>
+<!-- end of menu page -->
+
+<div data-role="page" id="alphaPage" data-theme="f" >
+
+  <div data-role="header" data-theme="f" data-position="fixed">
+    <h1>Alphabets</h1>
+    <a href="#menu"  data-direction="reverse" data-transition="none" data-icon="back">Back</a> 
+  </div>
+  <!-- end of header -->
+  
+  <div data-role="content">
+    <ul data-role="listview" id="bets" data-filter="true" data-filter-placeholder="Search alphabets..." data-theme="f">
+    </ul>
+  </div>
+  <!-- end of content-->
+  
+  <div data-role="footer" data-theme="f" data-position="fixed">
+    <h4> Copyright 2013</h4>
+  </div>
+  <!-- end of footer --> 
+  
+</div>
+<!-- end of alphaPage page -->
+
+<div data-role="page" id="alphaCommonPage" data-theme="f">
+
+  <div data-role="header" data-theme="f" data-position="fixed">
+    <h1 id="alphatitle"></h1>
+    <a href="#alphaPage"  data-direction="reverse" data-transition="none" data-icon="back" id="back">Back</a> 
+    <a href="#menu" data-transition="none" data-icon="home" >Home</a> 
+  </div>
+  <!-- end of header -->
+  
+  <div data-role="content">
+  
+    <center>
+      <img id="alphapic" />
+    </center>
+    <p></p>
+    
+    <div class="spcontainer"> <img src="images/speaker.png" align="right" id="sp1"/><br/>
+      <p></p>
+    </div>
+    <!-- end of spcontainer -->
+    
+    <div class="container">
+      <div id="alphalower"></div>
+      <p></p>
+      <div id="alphaupper"></div>
+    </div>
+    <!-- end of container -->
+    
+  </div>
+  <!-- end of content-->
+  
+  <div data-role="footer" data-theme="f" data-position="fixed">
+    <h4> Copyright 2013</h4>
+  </div>
+  <!--end of footer --> 
+  
+</div>
+<!-- end of alphaCommonPage -->
+
+
+</body>
+</html>
