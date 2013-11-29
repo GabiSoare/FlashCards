@@ -33,11 +33,11 @@ function setData(choice){
 	if(alphabet_rand[index-1] == answers[choice]){
 		result.style.display = "block";
 		img_result.src = "images/correct.png"
-		setTimeout(incIndex,500);
+		setTimeout(incIndex,2000);
 	}else{
 		result.style.display = "block";
 		img_result.src = "images/wrong.png"
-		setTimeout(function resetwrong(){result.style.display = "none";},500);
+		setTimeout(function resetwrong(){result.style.display = "none";},2000);
 	}
 }
 
