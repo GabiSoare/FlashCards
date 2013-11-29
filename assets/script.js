@@ -60,9 +60,9 @@ function incIndex(){
 		answers = [alphabet[index-1],alphabet1[0],alphabet1[1]];
 		shuffle(answers);
 		
-		firstImg.src =  "images/"+answers[0]+answers[0]+".png";
-		secondImg.src = "images/"+answers[1]+answers[1]+".png";
-		thirdImg.src =  "images/"+answers[2]+answers[2]+".png";	
+		firstImg.src =  "images/"+answers[0].toUpperCase()+answers[0].toLowerCase()+".png";
+		secondImg.src = "images/"+answers[1].toUpperCase()+answers[1].toLowerCase()+".png";
+		thirdImg.src =  "images/"+answers[2].toUpperCase()+answers[2].toLowerCase()+".png";	
 		
 		index++;
 	}	
