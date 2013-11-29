@@ -1,10 +1,23 @@
 <!doctype html>
 <html>
-<head>
-<meta charset="utf-8">
-<title>Untitled Document</title>
-</head>
-
+	<head>
+	<meta charset="utf-8">
+	<title>Flashcards</title>
+	<link rel="stylesheet" href="assets/activity_design.css" />
+	</head>
+	
 <body>
+	<div align="center">
+		<p id="question" style="font-size: 30px"></p>
+		<div class="images">
+			<img id="firstImg" src="" onclick="setData(0)"/> 
+			<img id="secondImg" src="" onclick="setData(1)"/> 
+			<img id="thirdImg" src="" onclick="setData(2)"/> 
+		</div>
+	</div>
+	<div id="result" class="result" >
+		<img id="img_result" src="images/wrong.png" style="  position: fixed;  top: 40%;  left: 50%;  margin-top: -50px;  margin-left: -100px;" />
+	</div>
 </body>
+<script src="assets/script.js"></script>
 </html>
