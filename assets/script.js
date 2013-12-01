@@ -26,7 +26,35 @@ var index = 1;
 var alphabet1 = [];
 var answers = [];
 
-	
+
+function playAudio(src) {
+
+    // HTML5 Audio
+    if (typeof Audio != "undefined") { 
+        new Audio(src).play() ;
+
+    // Phonegap media
+    } else if (typeof device != "undefined") {
+
+        // Android needs the search path explicitly specified
+        if (device.platform == 'Android') {
+            src = '/android_asset/www/' + src;
+        }
+
+        var mediaRes = new Media(src,
+            function onSuccess() {
+                // release the media resource once finished playing
+                mediaRes.release();
+            },
+            function onError(e){
+                console.log("error playing sound: " + JSON.stringify(e));
+            });
+        mediaRes.play();
+
+    } else {
+        console.log("no sound API to play: " + src);
+    }
+}
 	
 setData(10);
 
@@ -36,23 +64,36 @@ function setData(choice){
 		return false;
 	}
 	if(alphabet_rand[index-1] == answers[choice]){
-
+		playAudio("sounds/correct.mp3");
 		switch(choice){
-			case 0:r1.src = "images/correct.png";
+			case 0:
+				r1.style.display = "inline";
+				r1.src = "images/correct.png";
 				break;
-			case 1:r2.src = "images/correct.png";
+			case 1:
+				r2.style.display = "inline";
+				r2.src = "images/correct.png";
 				break;
-			case 2:r3.src = "images/correct.png";
+			case 2:
+				r3.style.display = "inline";
+				r3.src = "images/correct.png";
 				break;								
 		}
 		setTimeout(incIndex,1500);
 	}else{
+		playAudio("sounds/wrong.mp3");
 		switch(choice){
-			case 0:r1.src = "images/wrong.png";
+			case 0:
+				r1.style.display = "inline";
+				r1.src = "images/wrong.png";
 				break;
-			case 1:r2.src = "images/wrong.png";
+			case 1:
+				r2.style.display = "inline";
+				r2.src = "images/wrong.png";
 				break;
-			case 2:r3.src = "images/wrong.png";
+			case 2:
+				r3.style.display = "inline";
+				r3.src = "images/wrong.png";
 				break;								
 		}
 		
@@ -62,9 +103,9 @@ function setData(choice){
 
 function incIndex(){
 	result.style.display = "none";
-	r1.src = "";
-	r2.src = "";
-	r3.src = "";
+	r1.style.display = "none";
+	r2.style.display = "none";
+	r3.style.display = "none";
 	window.location.href = "#";
 	if(index!=27){
 
