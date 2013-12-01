@@ -43,7 +43,15 @@ var answers = [];
         // Play audio
         my_media.play();
     }
-	
+    function getPath() 
+	{
+        var str = location.pathname;
+        var i = str.lastIndexOf('/');
+        return str.substring(0,i+1);
+    }
+
+    // onSuccess Callback
+    //
     function onSuccess() 
 	{
         console.log("playAudio():Audio Success");
@@ -55,7 +63,7 @@ var answers = [];
 	{
         // alert('code: '    + error.code    + '\n' +
         //       'message: ' + error.message + '\n');
-    }	
+    }
 	
 setData(10);
 
@@ -65,7 +73,7 @@ function setData(choice){
 		return false;
 	}
 	if(alphabet_rand[index-1] == answers[choice]){
-		playAudio("sounds/correct.mp3");
+		playAudio(getPath() + "sounds/correct.mp3");
 		switch(choice){
 			case 0:
 				r1.style.display = "inline";
@@ -82,7 +90,7 @@ function setData(choice){
 		}
 		setTimeout(incIndex,1500);
 	}else{
-		playAudio("sounds/wrong.mp3");
+		playAudio(getPath() + "sounds/wrong.mp3");
 		switch(choice){
 			case 0:
 				r1.style.display = "inline";
