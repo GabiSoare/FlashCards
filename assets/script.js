@@ -26,34 +26,36 @@ var index = 1;
 var alphabet1 = [];
 var answers = [];
 
-function playAudio(src) {
+		
+	var my_media = null;
 
-    // HTML5 Audio
-    if (typeof Audio != "undefined") { 
-        new Audio(src).play() ;
+	function playAudio(src) 
+	{
+        // Create Media object from src
 
-    // Phonegap media
-    } else if (typeof device != "undefined") {
-
-        // Android needs the search path explicitly specified
-        if (device.platform == 'Android') {
-            src = '/android_asset/www/' + src;
+        if (my_media) 
+		{
+            my_media.stop();
         }
+        
+        my_media = new Media(src, onSuccess, onError);
 
-        var mediaRes = new Media(src,
-            function onSuccess() {
-                // release the media resource once finished playing
-                mediaRes.release();
-            },
-            function onError(e){
-                console.log("error playing sound: " + JSON.stringify(e));
-            });
-        mediaRes.play();
-
-    } else {
-        console.log("no sound API to play: " + src);
+        // Play audio
+        my_media.play();
     }
-}
+	
+    function onSuccess() 
+	{
+        console.log("playAudio():Audio Success");
+    }
+
+    // onError Callback
+    //
+    function onError(error) 
+	{
+        // alert('code: '    + error.code    + '\n' +
+        //       'message: ' + error.message + '\n');
+    }	
 	
 setData(10);
 
