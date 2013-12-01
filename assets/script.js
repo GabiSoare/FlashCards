@@ -11,8 +11,14 @@ var q = document.getElementById("question");
 var firstImg = document.getElementById("firstImg");
 var secondImg = document.getElementById("secondImg");
 var thirdImg = document.getElementById("thirdImg");
-var result = document.getElementById("result");
-var img_result= document.getElementById("img_result");
+var finished = document.getElementById("finished");
+var game = document.getElementById("game");
+
+var r1= document.getElementById("r1");
+var r2= document.getElementById("r2");
+var r3= document.getElementById("r3");
+
+
 
 shuffle(alphabet);
 alphabet_rand= alphabet.slice(0);
@@ -21,7 +27,8 @@ var alphabet1 = [];
 var answers = [];
 
 
-
+var wrongSound = new Audio('sounds/wrong.mp3');
+var correctSound = new Audio('sounds/correct.mp3');
 	
 setData(10);
 
@@ -31,22 +38,40 @@ function setData(choice){
 		return false;
 	}
 	if(alphabet_rand[index-1] == answers[choice]){
-		result.style.display = "block";
-		img_result.src = "images/correct.png"
-		setTimeout(incIndex,2000);
+		correctSound.play();		
+		switch(choice){
+			case 0:r1.src = "images/correct.png";
+				break;
+			case 1:r2.src = "images/correct.png";
+				break;
+			case 2:r3.src = "images/correct.png";
+				break;								
+		}
+		setTimeout(incIndex,200);
 	}else{
-		result.style.display = "block";
-		img_result.src = "images/wrong.png"
-		setTimeout(function resetwrong(){result.style.display = "none";},2000);
+		wrongSound.play();
+		switch(choice){
+			case 0:r1.src = "images/wrong.png";
+				break;
+			case 1:r2.src = "images/wrong.png";
+				break;
+			case 2:r3.src = "images/wrong.png";
+				break;								
+		}
+		
+		setTimeout(function resetwrong(){	r1.src = "";	r2.src = "";	r3.src = "";},200);
 	}
 }
 
 function incIndex(){
 	result.style.display = "none";
+	r1.src = "";
+	r2.src = "";
+	r3.src = "";
+	window.location.href = "#";
+	if(index!=27){
 
-	if(index!=26){
-
-		q.innerHTML = question +"<strong>"+ alphabet[index-1]+"</strong> " + "?<br>created by www.embeddedsoft.ro"; 
+		q.innerHTML = question +"<strong>"+ alphabet[index-1]+"</strong> " + "?"; 
 
 		for(var i = 1; i < alphabet_rand.length; i++){
 			alphabet1[i-1] = alphabet_rand[i];	
@@ -65,6 +90,9 @@ function incIndex(){
 		thirdImg.src =  "images/"+answers[2].toUpperCase()+answers[2].toLowerCase()+".png";	
 		
 		index++;
+	}else{
+		game.style.display = "none";
+		finished.innerHTML = "Well Done!";
 	}	
 }
 
