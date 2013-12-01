@@ -26,7 +26,6 @@ var index = 1;
 var alphabet1 = [];
 var answers = [];
 
-
 function playAudio(src) {
 
     // HTML5 Audio
@@ -97,7 +96,7 @@ function setData(choice){
 				break;								
 		}
 		
-		setTimeout(function resetwrong(){	r1.src = "";	r2.src = "";	r3.src = "";},1500);
+		setTimeout(function resetwrong(){	r1.style.display = "none";	r2.style.display = "none";	r3.style.display = "none";},1500);
 	}
 }
 
