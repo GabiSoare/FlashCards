@@ -47,7 +47,7 @@ function setData(choice){
 			case 2:r3.src = "images/correct.png";
 				break;								
 		}
-		setTimeout(incIndex,200);
+		setTimeout(incIndex,1500);
 	}else{
 		wrongSound.play();
 		switch(choice){
@@ -59,7 +59,7 @@ function setData(choice){
 				break;								
 		}
 		
-		setTimeout(function resetwrong(){	r1.src = "";	r2.src = "";	r3.src = "";},200);
+		setTimeout(function resetwrong(){	r1.src = "";	r2.src = "";	r3.src = "";},1500);
 	}
 }
 
