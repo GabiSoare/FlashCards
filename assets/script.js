@@ -26,9 +26,7 @@ var index = 1;
 var alphabet1 = [];
 var answers = [];
 
-
-var wrongSound = new Audio('sounds/wrong.mp3');
-var correctSound = new Audio('sounds/correct.mp3');
+	
 	
 setData(10);
 
@@ -38,7 +36,7 @@ function setData(choice){
 		return false;
 	}
 	if(alphabet_rand[index-1] == answers[choice]){
-		correctSound.play();		
+
 		switch(choice){
 			case 0:r1.src = "images/correct.png";
 				break;
@@ -49,7 +47,6 @@ function setData(choice){
 		}
 		setTimeout(incIndex,1500);
 	}else{
-		wrongSound.play();
 		switch(choice){
 			case 0:r1.src = "images/wrong.png";
 				break;

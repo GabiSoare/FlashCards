@@ -10,12 +10,18 @@
 	<div id="game" align="center" style="display:block">
 		<p id="question" style="font-size: 19px">.</p>
 		<div >
-			<img id="r1" src=""  style="position:absolute;"/>
-			<img id="firstImg" src="" onclick="setData(0)"/> 
-			<img id="r2" src=""  style="position:absolute;"/>
-			<img id="secondImg" src="" onclick="setData(1)"/> 
-			<img id="r3" src=""  style="position:absolute;"/>
-			<img id="thirdImg" src="" onclick="setData(2)"/> 
+			<div style="position: relative">
+				<img id="r1" src="" style="position: absolute"/>
+				<img id="firstImg" src="" onclick="setData(0)"/> 
+			</div>
+			<div style="position: relative">
+				<img id="r2" src=""  style="position:absolute;"/>
+				<img id="secondImg" src="" onclick="setData(1)"/> 
+			</div>
+			<div style="position: relative">
+				<img id="r3" src=""  style="position:absolute;"/>
+				<img id="thirdImg" src="" onclick="setData(2)" /> 
+			</div>
 		</div>
 	<div id="result" class="result" >
 		<img id="img_result" src="images/wrong.png"  />
@@ -23,5 +29,6 @@
 	</div>
 	<p id="finished" align="center" style="font-size: 35px"></p>
 </body>
+<script src="assets/jquery-1.8.2.min.js"></script>
 <script src="assets/script.js"></script>
 </html>
