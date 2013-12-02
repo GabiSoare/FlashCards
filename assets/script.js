@@ -139,7 +139,7 @@ function incIndex(){
 		index++;
 	}else{
 		game.style.display = "none";
-		finished.innerHTML = "Well Done!<br><br><a href='activities.html' rel='external' data-transition='none' style='text-decoration:none'><span style='font-size:35px'>PLAY AGAIN</a><br><br><br><a href='index.html' rel='external' data-transition='none' style='text-decoration:none'>Go Home</a><span>";
+		finished.innerHTML = "Well Done!<br><br><a href='activities.html' rel='external' data-transition='none' style='text-decoration:none'><span style='font-size:35px'>PLAY AGAIN</a><br><br><br><a href='index.html#menu' rel='external' data-transition='none' style='text-decoration:none'>Go Home</a><span>";
 	}	
 }
 
