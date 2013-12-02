@@ -139,8 +139,7 @@ function incIndex(){
 		index++;
 	}else{
 		game.style.display = "none";
-		finished.innerHTML = "Well Done!<br><br><br><a href='activities.html' rel='external' data-transition='none'><span style='font-size:35px'>PLAY AGAIN<span>";
-		window.location.href = "activities.html";
+		finished.innerHTML = "Well Done!<br><br><br><a href='activities.html' rel='external' data-transition='none' style='text-decoration:none'><span style='font-size:35px'>PLAY AGAIN<span>";
 	}	
 }
 
